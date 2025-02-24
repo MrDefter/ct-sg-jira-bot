@@ -1,0 +1,53 @@
+[tool.ruff]
+line-length = 100
+dummy-variable-rgx = "^_$"
+required-version = "0.1.11"
+target-version = "py310"
+extend-exclude = ["migrations"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D105",
+    "D401", "D403", "D404",
+    "ANN101", "ANN102",
+    "S311",
+    "FBT",
+    "G",
+    "TD001", "TD002", "TD003",
+    "FIX",
+    "ERA",
+    "TRY400", "TRY401",
+    "RUF001", "RUF002", "RUF003",
+]
+
+[tool.ruff.per-file-ignores]
+"tests/*" = [
+    "S101",
+]
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+line-ending = "lf"
+quote-style = "single"
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = [
+    "fastapi.Body", "fastapi.Depends", "fastapi.Form", "fastapi.File", "fastapi.Header",
+    "fastapi.Path", "fastapi.Query", "fastapi.Security",
+]
+
+[tool.mypy]
+python_version = "3.10"
+exclude = [
+    "^migrations/$",
+    "^venv/$",
+]
+plugins = [
+  "pydantic.mypy",
+]
