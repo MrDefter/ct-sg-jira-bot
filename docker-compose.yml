@@ -1,0 +1,20 @@
+services:
+  postgresql:
+    container_name: postgresql
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgresql
+    ports:
+      - "5432:5432"
+  ct-sg-login-service:
+    container_name: ct-sg-login-service
+    build:
+      context: ../ct-sg-login-service
+      dockerfile: Dockerfile-local
+    restart: unless-stopped
+    command: >
+      python3 main.py --host=0.0.0.0 --port=8000
+    ports:
+      - "8000:8000"
